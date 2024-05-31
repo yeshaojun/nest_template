@@ -1,7 +1,8 @@
-<<<<<<< HEAD
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
+import { CreateUserDto } from '../user/user.dto';
+import { User } from 'src/database/schemas/user.schema';
 
 @Controller('auth')
 export class AuthController {
@@ -16,23 +17,7 @@ export class AuthController {
   }
 
   @Post('/register')
-  register(
-    @Body() registerDto: { account: string; password: string; name: string },
-  ) {
-    return this.userService.createUser(registerDto);
+  register(@Body() registerDto: CreateUserDto) {
+    return this.userService.createUser(registerDto as User);
   }
 }
-=======
-import { Controller, Post, Body } from '@nestjs/common';
-import { AuthService } from './auth.service';
-
-@Controller('auth')
-export class AuthController {
-  constructor(private authService: AuthService) {}
-
-  @Post('login')
-  signIn(@Body() signInDto: { account: string; password: string }) {
-    return this.authService.signIn(signInDto.account, signInDto.password);
-  }
-}
->>>>>>> 082d2e93d5003affeb3efd51f81c4efae0fe7095

@@ -11,18 +11,13 @@ export class UserService {
     @InjectModel(User.name) private userModel: Model<User>,
   ) {}
 
-  async createUser(form: { account: string; password: string; name: string }) {
-    try {
-      const isRegister = await this.userModel.findOne({
-        account: form.account,
-      });
-      if (isRegister) {
-        throw new BadGatewayException('账号已存在！');
-      }
-    } catch (error) {
-      throw new BadGatewayException('数据库查询失败');
+  async createUser(form: User) {
+    const isRegister = await this.userModel.findOne({
+      account: form.account,
+    });
+    if (isRegister) {
+      throw new BadGatewayException('账号已存在！');
     }
-
     const salt = bcrypt.genSaltSync(10);
     const psw = bcrypt.hashSync(form.password, salt);
     try {
