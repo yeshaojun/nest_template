@@ -1,0 +1,6 @@
+DB_USER = 'u_flow'
+DB_PASSWORD = 'Laech7ch'
+DB_HOST = '192.168.1.187'
+DB_PORT = '37017'
+DB_NAME = 'nest'
+
