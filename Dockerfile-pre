@@ -13,4 +13,4 @@ RUN npm install
 RUN npm i -g @nestjs/cli
 RUN npm run build
 
-#CMD [ "npm", "run", "start:prod" ]
+CMD [ "npm", "run", "start:prod" ]
