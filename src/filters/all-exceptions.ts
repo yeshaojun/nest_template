@@ -22,9 +22,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       exception instanceof HttpException
         ? exception.message
         : '服务器出错喽，请联系开发人员';
-    response.status(status).json({
-      code: 500,
-      statusCode: status,
+    response.json({
+      code: status,
+      statusCode: 200,
       timestamp: new Date().toISOString(),
       path: request.url,
       msg: message,

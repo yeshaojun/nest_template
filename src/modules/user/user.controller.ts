@@ -1,21 +1,17 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { LogService } from '../../log/log.service';
+import { AuthGuard } from '../../guard/auth.guard';
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
     private log: LogService,
   ) {}
-  @Get(':id')
-  async getUserInfo(@Param() params: { id: number }): Promise<string> {
-    return await this.userService.getUserInfo(params.id);
-  }
 
-  @Post('/add')
-  createUser(
-    @Body() form: { account: string; password: string; name: string },
-  ) {
-    return this.userService.createUser(form);
+  @UseGuards(AuthGuard)
+  @Get(':id')
+  async getUserInfo(@Req() req: any): Promise<string> {
+    return req.user;
   }
 }
