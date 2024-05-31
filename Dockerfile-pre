@@ -1,17 +1,15 @@
-FROM node:16.3-alpine
+FROM node:20.9.0-alpine
 
-RUN echo "20.201.28.151 github.com" >> /etc/hosts
-RUN echo "20.201.28.151 www.github.com" >> /etc/hosts
-RUN echo "121.37.144.64  registry.npmjs.org" >> /etc/hosts
+#RUN echo "20.201.28.151 github.com" >> /etc/hosts
+#RUN echo "20.201.28.151 www.github.com" >> /etc/hosts
+#RUN echo "121.37.144.64  registry.npmjs.org" >> /etc/hosts
 
 COPY ht-flow-server /
 
 RUN cp env-pre  .env
-#RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
-
-#RUN npm install -g pm2
-#RUN npm install -g node-gyp
-RUN yarn run build
+RUN npm install
+RUN npm i -g @nestjs/cli
+RUN npm run build
 
 CMD [ "npm", "run", "start:prod" ]
