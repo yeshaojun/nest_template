@@ -7,11 +7,11 @@ RUN echo "121.37.144.64  registry.npmjs.org" >> /etc/hosts
 COPY ht-flow-server /
 
 RUN cp env-pre  .env
-RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
+#RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 
-RUN npm install -g pm2
-RUN npm install -g node-gyp
+#RUN npm install -g pm2
+#RUN npm install -g node-gyp
 RUN yarn run build
 
 CMD [ "npm", "run", "start:prod" ]
