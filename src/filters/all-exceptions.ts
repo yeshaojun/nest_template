@@ -6,11 +6,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { LogService } from 'src/log/log.service';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private log: LogService) {}
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const request = ctx.getRequest<Request>();
@@ -35,7 +33,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
         }
       }
     }
-    this.log.error(message, status.toString(), this);
     response.json({
       code: status,
       timestamp: new Date().toISOString(),
