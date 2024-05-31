@@ -8,8 +8,9 @@ COPY ht-flow-server /
 
 RUN cp env-pre  .env
 
-#RUN npm install
-#RUN npm i -g @nestjs/cli
-#RUN npm run build
+RUN pwd
+RUN npm install
+RUN npm i -g @nestjs/cli
+RUN npm run build
 
 #CMD [ "npm", "run", "start:prod" ]
