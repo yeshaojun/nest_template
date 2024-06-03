@@ -14,4 +14,5 @@ export class UserController {
   async getUserInfo(@Req() req: any): Promise<string> {
     return req.user;
   }
+  // 退出登陆需要使用白名单根黑名单的方案，比如将token存缓存，
 }
