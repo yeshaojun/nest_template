@@ -2,6 +2,13 @@ import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { LogService } from '../../log/log.service';
 import { AuthGuard } from '../../guard/auth.guard';
+import {
+  ApiTags,
+  ApiParam,
+  ApiOperation,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(
@@ -9,8 +16,11 @@ export class UserController {
     private log: LogService,
   ) {}
 
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get(':id')
+  @ApiOperation({ summary: '获取用户信息' })
+  @ApiParam({ name: 'id', description: '用户id', type: String })
   async getUserInfo(@Req() req: any): Promise<string> {
     return req.user;
   }
