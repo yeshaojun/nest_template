@@ -1,6 +1,4 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
-import { UserService } from './user.service';
-import { LogService } from '../../log/log.service';
 import { AuthGuard } from '../../guard/auth.guard';
 import {
   ApiTags,
@@ -11,11 +9,6 @@ import {
 @ApiTags('user')
 @Controller('user')
 export class UserController {
-  constructor(
-    private readonly userService: UserService,
-    private log: LogService,
-  ) {}
-
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get(':id')

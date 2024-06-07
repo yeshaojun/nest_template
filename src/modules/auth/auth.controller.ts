@@ -1,7 +1,13 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
-import { CreateUserDto } from '../user/user.dto';
+import { BaseUserDto, RegisterUserDto } from '../user/user.dto';
 import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger';
 import { User } from 'src/database/schemas/user.schema';
 @ApiTags('auth')
@@ -13,6 +19,7 @@ export class AuthController {
   ) {}
 
   @Post('login')
+  @UsePipes(new ValidationPipe({ skipMissingProperties: true }))
   @ApiOperation({ summary: '登录' })
   @ApiBody({
     description: '登录参数',
@@ -26,13 +33,13 @@ export class AuthController {
       required: ['account', 'password'],
     },
   })
-  signIn(@Body() signInDto: { account: string; password: string }) {
+  signIn(@Body() signInDto: BaseUserDto) {
     return this.authService.signIn(signInDto.account, signInDto.password);
   }
 
   @Post('/register')
   @ApiOperation({ summary: '注册' })
-  register(@Body() registerDto: CreateUserDto) {
+  register(@Body() registerDto: RegisterUserDto) {
     return this.userService.createUser(registerDto as User);
   }
 }

@@ -36,3 +36,5 @@ this.log.log('第一次', this);如果不传，则默认为application
 ### 6.参数校验
 
 通过管道来实现
+
+### 7.swagger文档

@@ -8,7 +8,6 @@ import { GraphModule } from './modules/graph/graph.module';
 import { LogService } from './log/log.service';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from './filters/all-exceptions';
-
 @Module({
   imports: [
     ConfigModule.forRoot({
