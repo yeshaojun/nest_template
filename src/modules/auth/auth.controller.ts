@@ -19,7 +19,6 @@ export class AuthController {
   ) {}
 
   @Post('login')
-  @UsePipes(new ValidationPipe({ skipMissingProperties: true }))
   @ApiOperation({ summary: '登录' })
   @ApiBody({
     description: '登录参数',

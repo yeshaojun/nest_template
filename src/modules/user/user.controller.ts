@@ -1,15 +1,9 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../../guard/auth.guard';
-import {
-  ApiTags,
-  ApiParam,
-  ApiOperation,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
+import { ApiTags, ApiParam, ApiOperation } from '@nestjs/swagger';
 @ApiTags('user')
 @Controller('user')
 export class UserController {
-  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get(':id')
   @ApiOperation({ summary: '获取用户信息' })
